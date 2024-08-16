@@ -1,5 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Example: Show a random affirmation
+    const correctPassword = "coco_petal365"
+    let userPassword = prompt("Welcome! Please enter the passworrd here:");
+    if (userPassword !== correctPassword) {
+        document.body.innerhtml = "<h1>Sorry! Access denied.</h1>";
+    } else {
+        
     const affirmations = [
         "I am strong and capable.",
         "I believe in myself.",
