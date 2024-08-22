@@ -1,10 +1,53 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
+    background: radial-gradient(circle, #fbc5e3 20%, transparent 70%) 10% 10%,
+                radial-gradient(circle, #faf1cf 20%, transparent 70%) 50% 50%,
+                radial-gradient(circle, #cffad5 20%, transparent 70%) 50% 50%;
+    background-size: 200% 200%; 
     margin: 0;
     padding: 20px;
 }
+
+h1, h2 {
+    color: #ffffff;
+    outline-color: antiquewhite;
+}
+
+#login {
+    text-align: center;
+    margin-top: 100px;
+}
+
+#passwordInput {
+    padding: 10px 20px;
+    border-radius: 50px;
+    border-color: rgb(253, 249, 252);
+    width: 250px;
+    font-size: 16px; 
+    transition: border-color 0.3s ease, border-width 0.3s ease;
+}
+
+#passwordInput:hover {
+    border: 2px solid #fbe3f2;
+    border-color: #ffbb00;
+}
+
+#submitPassword {
+    background-color: #4bb34f;
+    color: white;
+    padding: 10px 20px; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; 
+    transition: background-color 0.3s ease
+}
+
+#submitPassword:hover {
+    background-color: #316e34; 
+}
+
+
 
 #dashboard {
     max-width: 800px;
@@ -12,9 +55,11 @@ body {
     background: white;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1, h2 {
-    color: #5a67d8;
+#content {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 182, 193, 0.5);
 }

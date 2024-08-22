@@ -7,16 +7,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="dashboard">
-        <h1>Welcome, Yenori!</h1>
-        <section id="goals">
-            <h2>My Goals</h2>
-            <!-- Goal items can go here -->
-        </section>
-        <section id="affirmations">
-            <h2>Today's Affirmation</h2>
-            <!-- Random affirmation can be displayed here -->
-        </section>
+    <!-- Login -->
+    <div id="login">
+        <input type="password" id="passwordInput" placeholder="Hello! Please enter your password.">
+        <button id="submitPassword">Enter</button>
+    </div>
+    <div id="content" style="display: none;">
+        <!-- Dashboard -->
+        <div id="dashboard">
+            <h1>Welcome, Yenori!</h1>
+            <section id="goals">
+                <h2>My Goals</h2>
+        <!-- Affirmations -->
+            </section>
+            <section id="affirmations">
+                <h2>Today's Affirmation</h2>
+            </section>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
