@@ -35,31 +35,14 @@ document.addEventListener('DOMContentLoaded', async function() {
     const isAuthenticated = await auth0.isAuthenticated();
     if (isAuthenticated) {
         // Hide login, show content
-        document.getElementById('login').style.display = 'none';
         document.getElementById('content').style.display = 'block';
         const user = await auth0.getUser();
         console.log('User:', user);
     } else {
-        // Show login, hide content
-        document.getElementById('login').style.display = 'block';
-        document.getElementById('content').style.display = 'none';
-    }
-
-    // Handle the login event
-    document.getElementById('submitPassword').addEventListener('click', async () => {
         await auth0.loginWithRedirect({
             redirect_uri: window.location.origin
-        });
-    });
-
-    document.getElementById('passwordInput').addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            auth0.loginWithRedirect({
-                redirect_uri: window.location.origin
-            });
-        }
-    });
+        });    
+    }
 
     // Affirmation bank (public)
     const affirmations = [
