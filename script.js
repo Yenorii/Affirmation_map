@@ -1,3 +1,4 @@
+// Register the service worker
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/service-worker.js')
       .then(registration => {
@@ -6,9 +7,60 @@ if ('serviceWorker' in navigator) {
       .catch(error => {
         console.log('Service Worker registration failed:', error);
       });
-  }
+}
 
-document.addEventListener('DOMContentLoaded', function() {
+// Authenticate the user with aut0
+let auth0 = null;
+const initAuth0 = async () => {
+    auth0 = await createAuth0Client({
+        domain: 'YOUR_DOMAIN',
+        client_id: 'YOUR_CLIENT_ID'
+    });
+};
+
+// Handle callback
+const handleRedirectCallback = async () => {
+    const query = window.location.search;
+    if (query.includes("code=") && query.includes("state=")) {
+        await auth0.handleRedirectCallback();
+        window.history.replaceState({}, document.title, "/");
+    }
+};
+
+document.addEventListener('DOMContentLoaded', async function() {
+    await initAuth0();
+    await handleRedirectCallback();
+
+    // Check if the user is authenticated
+    const isAuthenticated = await auth0.isAuthenticated();
+    if (isAuthenticated) {
+        // Hide login, show content
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('content').style.display = 'block';
+        const user = await auth0.getUser();
+        console.log('User:', user);
+    } else {
+        // Show login, hide content
+        document.getElementById('login').style.display = 'block';
+        document.getElementById('content').style.display = 'none';
+    }
+
+    // Handle the login event
+    document.getElementById('submitPassword').addEventListener('click', async () => {
+        await auth0.loginWithRedirect({
+            redirect_uri: window.location.origin
+        });
+    });
+
+    document.getElementById('passwordInput').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            auth0.loginWithRedirect({
+                redirect_uri: window.location.origin
+            });
+        }
+    });
+
     // Affirmation bank (public)
     const affirmations = [
         "You are capable of amazing things",
@@ -30,43 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
         .join(' ★ ');
     document.getElementById('affirmation').textContent = selectedAffirmations + ' ★ ' + selectedAffirmations;
     
-    // Remember me
-    if (localStorage.getItem('rememberMe') === 'true') {
-        const savedTimestamp = parseInt(localStorage.getItem('timestamp'), 10);
-        const currentTime = Date.now();
-        const FOUR_HOURS = 4 * 60 * 60 * 1000; // 4 hours in milliseconds
-        
-        if (currentTime - savedTimestamp < FOUR_HOURS) {
-            document.getElementById('login').style.display = 'none';
-            document.getElementById('content').style.display = 'block';
-        } else {
-            localStorage.removeItem('rememberMe');
-            localStorage.removeItem('timestamp');
-        }
-    }
-    
-    // Password check
-    function submitPassword() {
-        const correctPassword = "Coco_petals365";
-        let userPassword = document.getElementById('passwordInput').value;
-        if (userPassword === correctPassword) {
-            localStorage.setItem('rememberMe', 'true');
-            localStorage.setItem('timestamp', Date.now().toString());
-            document.getElementById('login').style.display = 'none';
-            document.getElementById('content').style.display = 'block';
-        } else {
-            alert("Sorry, access denied.");
-        }
-    }
-
-    // Add event listener to submit button
-    document.getElementById('submitPassword').addEventListener('click', submitPassword);
-    document.getElementById('passwordInput').addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
-            submitPassword();
-        }
-    });
-
     // Define the goal functions
     function handleGoalClick(goalName) {
         alert(goalName + " Goal Clicked!");
