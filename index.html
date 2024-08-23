@@ -7,23 +7,48 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Login -->
+    <!-- Login field and button-->
     <div id="login">
         <input type="password" id="passwordInput" placeholder="Hello! Please enter your password.">
         <button id="submitPassword">Enter</button>
     </div>
+    <!-- Affirmation container (visible pre-login) -->
+    <div id="affirmation-container">
+        <p id="affirmation"></p>
+    </div>
     <div id="content" style="display: none;">
-        <!-- Dashboard -->
-        <div id="dashboard">
-            <h1>Welcome, Yenori!</h1>
-            <section id="goals">
-                <h2>My Goals</h2>
-        <!-- Affirmations -->
+        <h1>Welcome, Yenori!</h1>
+            <section id="pinned-goals">
+                <h2>My Goals:</h2>
+                <div id="workGoal" class="goal">
+                    <div class="goal-circle">
+                        <img src="images/work.png" alt="Work Goal" class="goal-image">
+                        <div class="goal-progress" data-progress="0"></div>
+                    </div>
+                    <span class="goal-title">Work</span>
+                </div>
+                <div id="homeGoal" class="goal">
+                    <div class="goal-circle">
+                        <img src="images/home.png" alt="Home Goal" class="goal-image">
+                        <div class="goal-progress" data-progress="0"></div>
+                    </div>
+                    <span class="goal-title">Home</span>
+                </div>
+                <div id="moneyGoal" class="goal">
+                    <div class="goal-circle">
+                        <img src="images/money.png" alt="Money Goal" class="goal-image">
+                        <div class="goal-progress" data-progress="0"></div>
+                    </div>
+                    <span class="goal-title">Money</span>
+                </div>
+                <div id="lifeGoal" class="goal">
+                    <div class="goal-circle">
+                        <img src="images/life.png" alt="Life Goal" class="goal-image">
+                        <div class="goal-progress" data-progress="0"></div>
+                    </div>
+                    <span class="goal-title">Life</span>
+                </div>
             </section>
-            <section id="affirmations">
-                <h2>Today's Affirmation</h2>
-            </section>
-        </div>
     </div>
     <script src="script.js"></script>
 </body>
