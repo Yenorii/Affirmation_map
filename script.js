@@ -13,8 +13,8 @@ if ('serviceWorker' in navigator) {
 let auth0 = null;
 const initAuth0 = async () => {
     auth0 = await createAuth0Client({
-        domain: 'YOUR_DOMAIN',
-        client_id: 'YOUR_CLIENT_ID'
+        domain: 'dev-met2gpq01cgrdesz.us.auth0.com',
+        client_id: 'FqxFlFOSVweSgXV95LXclmlMZdTYRgpo'
     });
 };
 

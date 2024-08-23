@@ -14,40 +14,6 @@ h1, h2 {
     text-align: center;
 }
 
-#login {
-    text-align: center;
-    margin-top: 100px;
-}
-
-#passwordInput {
-    padding: 10px 20px;
-    border-radius: 50px;
-    border-color: rgb(253, 249, 252);
-    width: 50%;
-    font-size: 14px; 
-    transition: border-color 0.3s ease, border-width 0.3s ease;
-}
-
-#passwordInput:hover {
-    border: 2px solid #fbe3f2;
-    border-color: #ffbb00;
-}
-
-#submitPassword {
-    background-color: #4bb34f;
-    color: white;
-    padding: 10px 20px; 
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px; 
-    transition: background-color 0.3s ease
-}
-
-#submitPassword:hover {
-    background-color: #316e34; 
-}
-
 #affirmation-container {
     position: fixed;
     bottom: 0;
