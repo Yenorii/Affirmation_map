@@ -9,7 +9,7 @@ if ('serviceWorker' in navigator) {
       });
 }
 
-// Authenticate the user with aut0
+// Authenticate the user with auth0
 let auth0 = null;
 const initAuth0 = async () => {
     auth0 = await createAuth0Client({
@@ -18,12 +18,12 @@ const initAuth0 = async () => {
     });
 };
 
-// Handle callback
 const handleRedirectCallback = async () => {
     const query = window.location.search;
     if (query.includes("code=") && query.includes("state=")) {
         await auth0.handleRedirectCallback();
-        window.history.replaceState({}, document.title, "/");
+        window.history.replaceState({}, document.title, "/Affirmation_map/dashboard.html");
+        window.location.href = "/Affirmation_map/dashboard.html";
     }
 };
 
@@ -33,18 +33,25 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // Check if the user is authenticated
     const isAuthenticated = await auth0.isAuthenticated();
-    if (isAuthenticated) {
-        // Hide login, show content
-        document.getElementById('content').style.display = 'block';
-        const user = await auth0.getUser();
-        console.log('User:', user);
+    const path = window.location.pathname;    
+    if (path.includes('dashboard.html')) {
+        if (isAuthenticated) {
+            document.getElementById('content').style.display = 'block';
+            const user = await auth0.getUser();
+            console.log('User:', user);
+            // Any other dashboard-specific logic here
+        } else {
+            await auth0.loginWithRedirect({
+                redirect_uri: 'https://yenorii.github.io/Affirmation_map/dashboard.html'
+            });
+        }
     } else {
-        await auth0.loginWithRedirect({
-            redirect_uri: window.location.origin
-        });    
+        if (isAuthenticated) {
+            window.location.href = 'https://yenorii.github.io/Affirmation_map/dashboard.html';
+        }
     }
 
-    // Affirmation bank (public)
+    // Affirmation bank
     const affirmations = [
         "You are capable of amazing things",
         "Today is a fresh start",
@@ -58,7 +65,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         "You are worthy of good things"
     ];
 
-    // Display multiple affirmations into one scrolling text
     const selectedAffirmations = affirmations
         .sort(() => 0.5 - Math.random())
         .slice(0, 4)
