@@ -34,9 +34,13 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Check if the user is authenticated
     const isAuthenticated = await auth0.isAuthenticated();
     const path = window.location.pathname;    
+
     if (path.includes('dashboard.html')) {
         if (isAuthenticated) {
-            document.getElementById('content').style.display = 'block';
+            const contentElement = document.getElementById('content')
+            if (contentElement) {
+                contentElement.style.display = 'block';
+            }
             const user = await auth0.getUser();
             console.log('User:', user);
             // Any other dashboard-specific logic here
@@ -65,32 +69,46 @@ document.addEventListener('DOMContentLoaded', async function() {
         "You are worthy of good things"
     ];
 
-    const selectedAffirmations = affirmations
-        .sort(() => 0.5 - Math.random())
-        .slice(0, 4)
-        .join(' ★ ');
-    document.getElementById('affirmation').textContent = selectedAffirmations + ' ★ ' + selectedAffirmations;
-    
-    // Define the goal functions
-    function handleGoalClick(goalName) {
-        alert(goalName + " Goal Clicked!");
+    const affirmationElement = document.getElementById('affirmation');
+    if (affirmationElement) {
+        const selectedAffirmations = affirmations
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 4)
+            .join(' ★ ');
+        affirmationElement.textContent = selectedAffirmations + ' ★ ' + selectedAffirmations;
     }
-    document.getElementById('workGoal').addEventListener('click', function() {
-        handleGoalClick("Work");
-    });
-    document.getElementById('homeGoal').addEventListener('click', function() {
-        handleGoalClick("Home");
-    });
-    document.getElementById('moneyGoal').addEventListener('click', function() {
-        handleGoalClick("Money");
-    });
-    document.getElementById('lifeGoal').addEventListener('click', function() {
-        handleGoalClick("Life");
-    });
 
-    function updateProgress(goalElement, progressPercentage) {
-        const progressCircle = goalElement.querySelector('.goal-progress');
-        const angle = (progressPercentage / 100) * 360;
-        progressCircle.style.borderColor = `conic-gradient(#4bb34f ${angle}deg, #ccc 0deg)`;
+    // Handle goal functions only if on the dashboard page
+    if (path.includes('dashboard.html')) {
+        function handleGoalClick(goalName) {
+            alert(goalName + " Goal Clicked!");
+        }
+        const workGoalElement = document.getElementById('workGoal');
+        if (workGoalElement) {
+            workGoalElement.addEventListener('click', function() {
+                handleGoalClick("Work");
+            });
+        }
+
+        const homeGoalElement = document.getElementById('homeGoal');
+        if (homeGoalElement) {
+            homeGoalElement.addEventListener('click', function() {
+                handleGoalClick("Home");
+            });
+        }
+
+        const moneyGoalElement = document.getElementById('moneyGoal');
+        if (moneyGoalElement) {
+            moneyGoalElement.addEventListener('click', function() {
+                handleGoalClick("Money");
+            });
+        }
+
+        const lifeGoalElement = document.getElementById('lifeGoal');
+        if (lifeGoalElement) {
+            lifeGoalElement.addEventListener('click', function() {
+                handleGoalClick("Life");
+            });
+        }
     }
 });
