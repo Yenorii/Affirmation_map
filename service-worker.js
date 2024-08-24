@@ -1,14 +1,16 @@
 const CACHE_NAME = 'Affirmations-cache-v1';
 const urlsToCache = [
-    '/',
-    '/index.html',
-    '/style.css',
-    '/script.js',
-    '/images/work.png', 
-    '/images/home.png',
-    '/images/money.png',
-    '/images/life.png'
+    '/Affirmation_map/',
+    '/Affirmation_map/index.html',
+    '/Affirmation_map/dashboard.html',
+    '/Affirmation_map/style.css',
+    '/Affirmation_map/script.js',
+    '/Affirmation_map/images/work.png', 
+    '/Affirmation_map/images/home.png',
+    '/Affirmation_map/images/money.png',
+    '/Affirmation_map/images/life.png'
 ];
+
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
