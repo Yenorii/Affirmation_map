@@ -46,12 +46,12 @@ document.addEventListener('DOMContentLoaded', async function() {
             // Any other dashboard-specific logic here
         } else {
             await auth0.loginWithRedirect({
-                redirect_uri: 'https://yenorii.github.io/Affirmation_map/dashboard.html/'
+                redirect_uri: 'https://yenorii.github.io/Affirmation_map/dashboard.html'
             });
         }
     } else {
         if (isAuthenticated) {
-            window.location.href = 'https://yenorii.github.io/Affirmation_map/dashboard.html/';
+            window.location.href = 'https://yenorii.github.io/Affirmation_map/dashboard.html';
         }
     }
 
