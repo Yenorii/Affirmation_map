@@ -19,6 +19,16 @@ const initAuth0 = async () => {
     console.log("Auth0 initialized:", auth0);
 };
 
+// Define handleRedirectCallback function
+const handleRedirectCallback = async () => {
+    const query = window.location.search;
+    if (query.includes("code=") && query.includes("state=")) {
+        await auth0.handleRedirectCallback();
+        window.history.replaceState({}, document.title, "/Affirmation_map/dashboard.html");
+        window.location.href = "/Affirmation_map/dashboard.html";
+    }
+};
+
 // Handle callbacks and page load
 document.addEventListener('DOMContentLoaded', async function() {
     await initAuth0();
