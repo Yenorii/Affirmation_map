@@ -28,18 +28,19 @@ const handleRedirectCallback = async () => {
     }
 };
 
+/// Handle callbacks and page load
 document.addEventListener('DOMContentLoaded', async function() {
     await initAuth0();
     await handleRedirectCallback();
 
-    // Check if the user is authenticated
     const isAuthenticated = await auth0.isAuthenticated();
     console.log("Is authenticated:", isAuthenticated);
-    const path = window.location.pathname;    
+    
+    const path = window.location.pathname;
 
     if (path.includes('dashboard.html')) {
         if (isAuthenticated) {
-            const contentElement = document.getElementById('content')
+            const contentElement = document.getElementById('content');
             if (contentElement) {
                 contentElement.style.display = 'block';
             }
