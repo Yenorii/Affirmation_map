@@ -16,6 +16,7 @@ const initAuth0 = async () => {
         domain: 'dev-met2gpq01cgrdesz.us.auth0.com',
         client_id: 'FqxFlFOSVweSgXV95LXclmlMZdTYRgpo'
     });
+    console.log("Auth0 initialized:", auth0);
 };
 
 const handleRedirectCallback = async () => {
@@ -33,6 +34,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // Check if the user is authenticated
     const isAuthenticated = await auth0.isAuthenticated();
+    console.log("Is authenticated:", isAuthenticated);
     const path = window.location.pathname;    
 
     if (path.includes('dashboard.html')) {
@@ -43,8 +45,8 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
             const user = await auth0.getUser();
             console.log('User:', user);
-            // Any other dashboard-specific logic here
         } else {
+            console.log("User not authenticated, redirecting to Auth0 login.");
             await auth0.loginWithRedirect({
                 redirect_uri: 'https://yenorii.github.io/Affirmation_map/dashboard.html'
             });
@@ -52,6 +54,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     } else {
         if (isAuthenticated) {
             window.location.href = 'https://yenorii.github.io/Affirmation_map/dashboard.html';
+        } else {
+            console.log("User not authenticated on index page.");
         }
     }
 
