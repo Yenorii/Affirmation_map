@@ -31,18 +31,21 @@ const handleRedirectCallback = async () => {
 
 // Handle callbacks and page load
 document.addEventListener('DOMContentLoaded', async function() {
+    console.log("Initializing Auth0");
     await initAuth0();
+    console.log("Auth0 Initialized. Handling redirect callback...");
     await handleRedirectCallback();
 
     const isAuthenticated = await auth0.isAuthenticated();
     console.log("Is authenticated:", isAuthenticated);
     
     if (isAuthenticated) {
+        console.log("Redirecting to dashboard...");
         window.location.href = 'https://yenorii.github.io/Affirmation_map/dashboard.html';
     } else {
         console.log("Redirecting to Auth0 login...");
         await auth0.loginWithRedirect({
-            redirect_uri: 'https://yenorii.github.io/Affirmation_map/dashboard.html'
+            redirect_uri: 'https://yenorii.github.io/Affirmation_map'
         });
     }
 
