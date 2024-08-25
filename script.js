@@ -45,4 +45,62 @@ document.addEventListener('DOMContentLoaded', async function() {
             redirect_uri: 'https://yenorii.github.io/Affirmation_map/dashboard.html'
         });
     }
+
+// Affirmation bank
+const affirmations = [
+    "You are capable of amazing things",
+    "Today is a fresh start",
+    "You bring something special to this world",
+    "Believe in your dreams",
+    "Your potential is limitless",
+    "Take it one step at a time",
+    "You are stronger than you think",
+    "Positivity is a choice",
+    "Your mind is powerful",
+    "You are worthy of good things"
+];
+
+const affirmationElement = document.getElementById('affirmation');
+if (affirmationElement) {
+    const selectedAffirmations = affirmations
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 4)
+        .join(' ★ ');
+    affirmationElement.textContent = selectedAffirmations + ' ★ ' + selectedAffirmations;
+}
+
+// Handle goal functions only if on the dashboard page
+if (path.includes('dashboard.html')) {
+    function handleGoalClick(goalName) {
+        alert(goalName + " Goal Clicked!");
+    }
+    const workGoalElement = document.getElementById('workGoal');
+    if (workGoalElement) {
+        workGoalElement.addEventListener('click', function() {
+            handleGoalClick("Work");
+        });
+    }
+
+    const homeGoalElement = document.getElementById('homeGoal');
+    if (homeGoalElement) {
+        homeGoalElement.addEventListener('click', function() {
+            handleGoalClick("Home");
+        });
+    }
+
+    const moneyGoalElement = document.getElementById('moneyGoal');
+    if (moneyGoalElement) {
+        moneyGoalElement.addEventListener('click', function() {
+            handleGoalClick("Money");
+        });
+    }
+
+    const lifeGoalElement = document.getElementById('lifeGoal');
+    if (lifeGoalElement) {
+        lifeGoalElement.addEventListener('click', function() {
+            handleGoalClick("Life");
+        });
+    }
+}
+
 });
