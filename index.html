@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Goals & Affirmations</title>
+    <title>Goals & Affirmations</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.auth0.com/js/auth0-spa-js/1.18/auth0-spa-js.production.js"></script>
 </head>
@@ -11,8 +11,20 @@
     <div id="affirmation-container">
         <p id="affirmation"></p>
     </div>
-    <div id="content" style="display: none;">
-    </div>
+
+    <!-- Login Form -->
+    <form action="dashboard.html" method="post">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <!-- Optional Link to Dashboard -->
+    <a href="dashboard.html">Go to Dashboard</a>
+
+    <!-- Hidden Content Div -->
+    <div id="content" style="display: none;"></div>
+
     <script src="script.js"></script>
 </body>
 </html>

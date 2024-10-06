@@ -31,24 +31,27 @@ const handleRedirectCallback = async () => {
 
 // Handle callbacks and page load
 document.addEventListener('DOMContentLoaded', async function() {
-    console.log("Initializing Auth0");
     await initAuth0();
-    console.log("Auth0 Initialized. Handling redirect callback...");
     await handleRedirectCallback();
-
-    const isAuthenticated = await auth0.isAuthenticated();
-    console.log("Is authenticated:", isAuthenticated);
-    
+    const isAuthenticated = await auth0.isAuthenticated();  
     if (isAuthenticated) {
-        console.log("Redirecting to dashboard...");
-        window.location.href = 'https://yenorii.github.io/Affirmation_map/dashboard.html';
+        document.getElementById('login-button').style.display = 'none'; // Hide login button
+        document.getElementById('logout-button').style.display = 'block'; // Show logout button
     } else {
-        console.log("Redirecting to Auth0 login...");
-        await auth0.loginWithRedirect({
-            redirect_uri: 'https://yenorii.github.io/Affirmation_map'
-        });
+        document.getElementById('login-button').style.display = 'block'; // Show login button
+        document.getElementById('logout-button').style.display = 'none'; // Hide logout button
     }
-
+    
+        // Event listeners for login/logout
+        document.getElementById('login-button').addEventListener('click', () => {
+            auth0.loginWithRedirect({ redirect_uri: window.location.origin });
+        });
+    
+        document.getElementById('logout-button').addEventListener('click', () => {
+            auth0.logout({ returnTo: window.location.origin });
+        });
+    });
+    
 // Affirmation bank
 const affirmations = [
     "You are capable of amazing things",
