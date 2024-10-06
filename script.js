@@ -76,6 +76,7 @@ if (affirmationElement) {
 }
 
 // Handle goal functions only if on the dashboard page
+const path = window.location.pathname;  
 if (path.includes('dashboard.html')) {
     function handleGoalClick(goalName) {
         alert(goalName + " Goal Clicked!");
