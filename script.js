@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             auth0.logout({ returnTo: window.location.origin });
         });
     });
-    
+
 // Affirmation bank
 const affirmations = [
     "You are capable of amazing things",
@@ -109,4 +109,4 @@ if (path.includes('dashboard.html')) {
     }
 }
 
-});
+;
